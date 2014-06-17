@@ -23,4 +23,18 @@ public class Map {
     public List<Parcel> getParcelList() {
         return parcelList;
     }
+
+    public void addParcel(Parcel parcel) {
+        if(!parcelList.contains(parcel)) {
+            parcelList.add(parcel);
+        }
+    }
+
+    public boolean removeParcel(Parcel parcel) {
+        if(!parcelList.contains(parcel)) {
+            return false;
+        }
+        parcelList.remove(parcel);
+        return true;
+    }
 }

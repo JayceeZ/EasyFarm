@@ -8,8 +8,6 @@ import java.awt.*;
  * @author Jean-Christophe Isoard
  */
 public class Parcel {
-    public static Parcel incomplete = new Parcel();
-
     private int id;
     private Harvest harvest;
     private Location location;
@@ -17,11 +15,25 @@ public class Parcel {
 
     /**
      * Generate a new parcel without any parameters (non displayed parcel)
+     * Note that using this builder is not recommended
      */
     public Parcel() {
-        this.harvest = Harvest.UNKNOWN;
-        this.location = new Location(0, 0);
-        this.geometry = null;
+        this(0, Harvest.UNKNOWN, new Location(0, 0), null);
+    }
+
+    /**
+     * Generate a parcel with required parameters to be usable
+     *
+     * @param id       Identifier of the parcel as stored in the bdd
+     * @param harvest  The harvest registered for this parcel
+     * @param location The upper-left position of the corner of the most little square that can contain the parcel
+     * @param geometry The polygon designating the parcel (the points that define the parcel)
+     */
+    public Parcel(int id, Harvest harvest, Location location, Polygon geometry) {
+        this.id = id;
+        this.harvest = harvest;
+        this.location = location;
+        this.geometry = geometry;
     }
 
     public int getId() {
@@ -39,8 +51,8 @@ public class Parcel {
     public Polygon getGeometry() {
         return geometry;
     }
-
-    public boolean isIncomplete() {
-        return this.equals(incomplete);
+    @Override
+    public String toString() {
+        return id+" "+location+" "+harvest;
     }
 }
