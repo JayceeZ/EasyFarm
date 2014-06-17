@@ -7,5 +7,5 @@ public enum Harvest {
     WHEAT,
     BARLEY,
     OAT,
-    COLZA;
+    COLZA, UNKNOWN;
 }
