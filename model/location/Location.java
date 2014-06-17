@@ -1,6 +1,7 @@
 package model.location;
 
 /**
+ * This class is about manipulating Earth coordinates
  * @author Jean-Christophe Isoard
  */
 public class Location {

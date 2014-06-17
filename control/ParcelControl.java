@@ -22,7 +22,7 @@ public class ParcelControl {
     /**
      * Return the geometry of the parcel associated to the id
      * <br />Need the parcel to be loaded from database
-     * @see global.LoadMap
+     * @see LoadMap
      * @param parcelId The id of the parcel we want
      */
     public Polygon getGeometry(int parcelId) {

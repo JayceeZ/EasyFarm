@@ -37,4 +37,9 @@ public class Map {
         parcelList.remove(parcel);
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "Map content: "+parcelList.toString();
+    }
 }

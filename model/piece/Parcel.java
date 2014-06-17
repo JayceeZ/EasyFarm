@@ -53,6 +53,6 @@ public class Parcel {
     }
     @Override
     public String toString() {
-        return id+" "+location+" "+harvest;
+        return "Parcel: "+id+" "+location+" "+harvest;
     }
 }
