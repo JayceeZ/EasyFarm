@@ -2,10 +2,37 @@ package global;
 
 import model.Map;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+
 /**
  * @author Jean-Christophe Isoard
  */
 public class LoadMap {
+    public static Connection connectionBDD;
+
+    /**
+     * Try connecting to the postgre sql bdd
+     * @return True on success, false on fail
+     */
+    public static boolean tryConnection() {
+        try {
+            Class.forName("org.postgresql.Driver");
+            System.out.println("Driver O.K.");
+
+            String url = "jdbc:postgresql://localhost:5432/EasyFarm";
+            String user = "postgres";
+            String passwd = "wsxd5cfvg";
+
+            connectionBDD = DriverManager.getConnection(url, user, passwd);
+            System.out.println("Connexion effective !");
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     /**
      * Load a piece of the map in the model map given in parameter
      * @param map
