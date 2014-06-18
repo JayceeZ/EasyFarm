@@ -1,6 +1,9 @@
 package model;
 
+import control.LoadMap;
+import model.location.Location;
 import model.piece.Parcel;
+import model.piece.Scale;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -12,12 +15,16 @@ import java.util.List;
  */
 public class Map {
     private List<Parcel> parcelList;
+    private Location origin;
+    private Scale scale;
 
     /**
      * Generate an empty map
      */
     public Map() {
-        parcelList = new LinkedList<Parcel>();
+        parcelList = new LinkedList<>();
+        origin = new Location();
+        scale = Scale.NORMALZOOM;
     }
 
     public List<Parcel> getParcelList() {
@@ -55,5 +62,16 @@ public class Map {
             }
         }
         return null;
+    }
+
+    /**
+     * Move the origin of the map using the (dx, dy) point given
+     * <br />Sign depends on cartesian move
+     * @param dx The number of pixels the x-axis as changed
+     * @param dy The number of pixels the y-axis as changed
+     */
+    public void moveOrigin(int dx, int dy) {
+        //TODO move the origin using the value of (dx, dy)
+
     }
 }

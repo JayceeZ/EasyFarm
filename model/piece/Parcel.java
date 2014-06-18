@@ -18,7 +18,7 @@ public class Parcel {
      * Note that using this builder is not recommended
      */
     public Parcel() {
-        this(0, Harvest.UNKNOWN, new Location(0, 0), null);
+        this(0, Harvest.UNKNOWN, new Location(), null);
     }
 
     /**

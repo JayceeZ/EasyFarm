@@ -1,5 +1,7 @@
 package control;
 
+import model.location.Cardinal;
+import model.location.Coordinate;
 import model.location.Location;
 import model.piece.Harvest;
 import model.piece.Parcel;
@@ -13,20 +15,23 @@ import java.util.Map;
  */
 public class LoadMap {
     /**
-     * Load some parcels in the model Map given in parameter
+     * Load the parcels in the model Map restricted to the area given with the two location given in parameters
      *
-     * @param map      the map which we want to add the parcels
-     * @param parcelId the parcel id from where the map start loading
-     * @param distance the distance of loading (kind of deep)
+     * @param map        the map which we want to add the parcels
+     * @param upperLeft  the upper-left corner of the map displayed
+     * @param lowerRight the lower-right corner of the map displayed
      */
-    public static void loadPieceOfMap(model.Map map, int parcelId, int distance) {
+    public static void loadPieceOfMap(model.Map map, Location upperLeft, Location lowerRight) {
         //TODO EAS-4 load from database using the 2 parameters
+        //TODO Load the location correctly
         List<Map<String, Object>> result = BDDConnect.getResult("SELECT * FROM parcels");
 
         for (Map<String, Object> item : result) {
             int id = (int) item.get("id");
             Harvest harvest = Harvest.valueOf((String) item.get("harvest"));
-            Location location = new Location((int) item.get("latitude"), (int) item.get("longitude"));
+            Coordinate latitude = new Coordinate((int) item.get("latitudeInt"), (int) item.get("latitudeDec"), Cardinal.NORTH);
+            Coordinate longitude = new Coordinate((int) item.get("longitudeInt"), (int) item.get("longitudeDec"), Cardinal.EAST);
+            Location location = new Location(latitude, longitude);
             Polygon geometry = (Polygon) item.get("geometry");
             Parcel parcel = new Parcel(id, harvest, location, geometry);
             map.addParcel(parcel);

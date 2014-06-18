@@ -5,24 +5,41 @@ package model.location;
  * @author Jean-Christophe Isoard
  */
 public class Location {
-    private int latitude;
-    private int longitude;
+    public static final Location zero = new Location();
 
-    public Location(int latitude, int longitude) {
+    private Coordinate latitude;
+    private Coordinate longitude;
+
+    /**
+     * Build a location with the initial coordinates both to zero equivalent
+     */
+    public Location() {
+        this(new Coordinate(0,0,Cardinal.NORTH), new Coordinate(0,0,Cardinal.EAST));
+    }
+
+    public Location(Coordinate latitude, Coordinate longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
     }
 
-    public int getLatitude() {
+    public Coordinate getLatitude() {
         return latitude;
     }
 
-    public int getLongitude() {
+    public Coordinate getLongitude() {
         return longitude;
+    }
+
+    /**
+     * Calculate the distance between two locations
+     * @return The distance in kilometers between two points
+     */
+    public static int getDistance() {
+        return 0;
     }
 
     @Override
     public String toString() {
-        return "["+latitude+","+longitude+"]";
+        return "["+latitude+", "+longitude+"]";
     }
 }

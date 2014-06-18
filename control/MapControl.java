@@ -1,8 +1,8 @@
 package control;
 
 import model.Map;
+import model.location.Location;
 import model.piece.Parcel;
-import view.ParcelView;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -16,11 +16,21 @@ public class MapControl {
 
     public MapControl() {
         this.map = new Map();
-        LoadMap.loadPieceOfMap(map, 0, 100);
+        LoadMap.loadPieceOfMap(map, Location.zero, Location.zero);
     }
 
-    public static void mouseClic() {
-        //TODO what to do onclick on a parcel
+    /**
+     * This method load the missing parcels in the map when using the top-left corner point given
+     * @param point The top-left corner point to use (origin of the map)
+     */
+    public void update(Location point) {
+        //TODO EAS-4 update should ask for a predetermined bunch of parcels, depends on the loadPieceOfMap method
+        map.setOrigine(point);
+        LoadMap.loadPieceOfMap(map, Location.zero, Location.zero);
+    }
+
+    public static void mouseClic(Point mouseLocation) {
+        //TODO what to do onclick on the map
 
     }
 
@@ -42,7 +52,7 @@ public class MapControl {
      * Return the collection of all geometry of all the parcels loaded for the map
      * @return All the geometries of parcels in a collection
      */
-    public Collection<Polygon> getAllGeometry() {
+    public Collection<Polygon> getAllGeometries() {
         Collection<Polygon> geometries = new ArrayList<>();
         for(Parcel parcel:map.getParcelList()) {
             geometries.add(parcel.getGeometry());

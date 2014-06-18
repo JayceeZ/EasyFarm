@@ -6,7 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
 
 /**
  * @author Jean-Christophe Isoard
@@ -28,7 +27,7 @@ public class MapView extends JPanel {
      * Paint the map with all the elements
      */
     private void paintMap(Graphics g) {
-        for(Polygon geometry:mapControl.getAllGeometry()) {
+        for(Polygon geometry:mapControl.getAllGeometries()) {
             if(geometry != null) {
                 g.drawPolygon(geometry);
             }
@@ -38,7 +37,7 @@ public class MapView extends JPanel {
     private class MouseListener extends MouseAdapter {
         @Override
         public void mouseClicked(MouseEvent e) {
-            mapControl.mouseClic();
+            mapControl.mouseClic(e.getPoint());
         }
     }
 }
