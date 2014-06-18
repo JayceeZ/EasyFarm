@@ -6,30 +6,36 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 
 /**
  * @author Jean-Christophe Isoard
  */
-public class ParcelView extends JPanel {
-    private int parcelId;
+public class MapView extends JPanel {
     private MapControl mapControl;
 
-    public ParcelView(int parcelId, MapControl mapControl) {
-        this.parcelId = parcelId;
+    public MapView(MapControl mapControl) {
         this.mapControl = mapControl;
-
-        this.addMouseListener(new ClickOnParcel());
     }
 
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-
-        Polygon parcelGeometry = mapControl.getGeometry(parcelId);
-        g.drawPolygon(parcelGeometry);
+        paintMap(g);
     }
 
-    private class ClickOnParcel extends MouseAdapter {
+    /**
+     * Paint the map with all the elements
+     */
+    private void paintMap(Graphics g) {
+        for(Polygon geometry:mapControl.getAllGeometry()) {
+            if(geometry != null) {
+                g.drawPolygon(geometry);
+            }
+        }
+    }
+
+    private class MouseListener extends MouseAdapter {
         @Override
         public void mouseClicked(MouseEvent e) {
             mapControl.mouseClic();

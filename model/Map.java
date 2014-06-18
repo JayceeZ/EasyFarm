@@ -42,4 +42,18 @@ public class Map {
     public String toString() {
         return "Map content: "+parcelList.toString();
     }
+
+    /**
+     * Return the parcel with the given id (if it exists) or return null
+     * @param parcelId The id of the parcel we asked for
+     * @return the asked parcel object, or null if not found
+     */
+    public Parcel getParcel(int parcelId) {
+        for(Parcel parcel:parcelList) {
+            if(Integer.compare(parcel.getId(), parcelId) == 0) {
+                return parcel;
+            }
+        }
+        return null;
+    }
 }
