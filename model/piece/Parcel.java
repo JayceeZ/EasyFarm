@@ -19,7 +19,7 @@ public class Parcel {
      * Note that using this builder is not recommended
      */
     public Parcel() {
-        this(0, Harvest.UNKNOWN, new Location(), null);
+        this(0, Harvest.UNKNOWN, new Location(), new Shape());
     }
 
     /**
@@ -55,6 +55,6 @@ public class Parcel {
 
     @Override
     public String toString() {
-        return "Parcel: " + id + " " + location + " " + harvest;
+        return "Parcel: " + id + " " + location + " " + shape + " " + harvest;
     }
 }

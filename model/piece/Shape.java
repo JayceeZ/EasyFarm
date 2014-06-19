@@ -1,7 +1,10 @@
 package model.piece;
 
+import model.location.Cardinal;
 import model.location.Coordinate;
 import model.location.Location;
+import org.postgresql.geometric.PGpoint;
+import org.postgresql.geometric.PGpolygon;
 import view.Scale;
 
 import java.awt.*;
@@ -28,28 +31,39 @@ public class Shape {
     }
 
     /**
-     * Generate the polygon geometry using the scale given as parameter
+     * Calculate the polygon display geometry using the scale and the map origin location given as parameter
+     * @param mapOrigin The location currently on top-left corner of the display
+     * @param scale The scale currently used for the map display
      * @return The polygon generated for painting on a panel
      */
-    public Polygon getGeometry(Scale scale) {
+    public Polygon getGeometry(Location mapOrigin, Scale scale) {
         //TODO calculate the polygon points using the relative position of the map with is origin location
         return null;
     }
 
     /**
      * Create a Shape object using the list of coordinates contained in a string
-     * @param locations the string defining the shape
-     * @return the object shape reconstructed from the string
+     * @param locationsInt the polygon containing the integer values of the locations defining the shape
+     * @param locationsDec the polygon containing the decimal values of the locations defining the shape
+     * @return the object shape reconstructed from the parameters
      */
-    public static Shape construct(String locations) {
-        if(locations == null)
+    public static Shape pgConstruct(PGpolygon locationsInt, PGpolygon locationsDec) {
+        if(locationsInt == null || locationsDec == null) {
             return null;
-        for(String part:locations.split(",")) {
-            Location location = new Location();
-            System.out.println(part);
-            //location.setLatitude(new Coordinate());
         }
-        return new Shape();
+        PGpoint[] pointsInt = locationsInt.points;
+        PGpoint[] pointsDec = locationsDec.points;
+        if(pointsInt.length != pointsDec.length) {
+            return null;
+        }
+        Shape shape = new Shape();
+        for(int n = 0; n < pointsInt.length; n++) {
+            Coordinate latitude = new Coordinate((int) pointsInt[n].x, (int)pointsDec[n].x, Cardinal.NORTH);
+            Coordinate longitude = new Coordinate((int) pointsInt[n].y, (int)pointsDec[n].y, Cardinal.EAST);
+            Location location = new Location(latitude, longitude);
+            shape.addLocation(location);
+        }
+        return shape;
     }
 
     @Override
