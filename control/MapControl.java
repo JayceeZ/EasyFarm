@@ -36,28 +36,10 @@ public class MapControl {
     }
 
     /**
-     * Return the geometry of the parcel associated to the id
-     * <br />Need the parcel to be loaded from database
-     * @see LoadMap
-     * @param parcelId The id of the parcel we want
-     */
-    public Polygon getGeometry(int parcelId, Scale scale) {
-        Parcel parcel = map.getParcel(parcelId);
-        if(parcel == null) {
-            return null;
-        }
-        return parcel.getGeometry(scale);
-    }
-
-    /**
      * Return the collection of all geometry of all the parcels loaded for the map
      * @return All the geometries of parcels in a collection
      */
     public Collection<Polygon> getAllGeometries(Scale scale) {
-        Collection<Polygon> geometries = new ArrayList<>();
-        for(Parcel parcel:map.getParcelList()) {
-            geometries.add(parcel.getGeometry(scale));
-        }
-        return geometries;
+        return map.getAllGeometries(scale);
     }
 }

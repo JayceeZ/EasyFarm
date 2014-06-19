@@ -36,9 +36,30 @@ public class Shape {
      * @param scale The scale currently used for the map display
      * @return The polygon generated for painting on a panel
      */
-    public Polygon getGeometry(Location mapOrigin, Scale scale) {
-        //TODO calculate the polygon points using the relative position of the map with is origin location
-        return null;
+    public Polygon calculateGeometry(Location mapOrigin, Scale scale) {
+        //TODO calculate the polygon points using the relative position of the map with her origin location
+        Polygon polygon = new Polygon();
+        for(Location location:locations) {
+            Coordinate locationLatitude = location.getLatitude();
+            Coordinate locationLongitude = location.getLongitude();
+            Coordinate originLatitude = mapOrigin.getLatitude();
+            Coordinate originLongitude = mapOrigin.getLongitude();
+
+            double lon = Double.parseDouble(locationLongitude.getDegreesIntegerPart()+"."+locationLongitude.getDegreesDecimalPart());
+            double lat = Double.parseDouble(locationLatitude.getDegreesIntegerPart()+"."+locationLatitude.getDegreesDecimalPart());
+
+            //double lonRad = Math.toRadians(lon);
+            double latRad = Math.toRadians(lat);
+            double n = Math.pow(2.0, scale.getReduce());
+
+            double tileX = ((lon + 180) / 360) * n;
+            double tileY = (1 - (Math.log(Math.tan(latRad) + 1.0/Math.cos(latRad)) / Math.PI)) * n / 2.0;
+
+            System.out.println("tileX = "+tileX+" tileY = "+tileY);
+
+            polygon.addPoint((int) tileX, (int) tileY);
+        }
+        return polygon;
     }
 
     /**

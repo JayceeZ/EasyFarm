@@ -4,6 +4,9 @@ import model.location.Location;
 import model.piece.Parcel;
 import view.Scale;
 
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -73,5 +76,13 @@ public class Map {
     public void moveOrigin(int dx, int dy) {
         //TODO move the origin using the value of (dx, dy)
 
+    }
+
+    public Collection<Polygon> getAllGeometries(Scale scale) {
+        Collection<Polygon> geometries = new ArrayList<>();
+        for (Parcel parcel : parcelList) {
+            geometries.add(parcel.getGeometry(origin, scale));
+        }
+        return geometries;
     }
 }

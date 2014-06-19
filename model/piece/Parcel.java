@@ -49,8 +49,11 @@ public class Parcel {
         return location;
     }
 
-    public Polygon getGeometry(Scale scale) {
-        return shape.getGeometry(scale);
+    public Polygon getGeometry(Location mapOrigin, Scale scale) {
+        if(shape == null) {
+            return null;
+        }
+        return shape.calculateGeometry(mapOrigin, scale);
     }
 
     @Override

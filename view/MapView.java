@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Arrays;
 
 /**
  * @author Jean-Christophe Isoard
@@ -29,8 +30,10 @@ public class MapView extends JPanel {
      * Paint the map with all the elements
      */
     private void paintMap(Graphics g) {
-        for(Polygon geometry:mapControl.getAllGeometries(scale)) {
-            if(geometry != null) {
+        System.out.println("Debug: ");
+        for (Polygon geometry : mapControl.getAllGeometries(scale)) {
+            if (geometry != null) {
+                System.out.println("Painting: (xpoints: " + Arrays.toString(geometry.xpoints) + ")(ypoints: " + Arrays.toString(geometry.ypoints) + ")");
                 g.drawPolygon(geometry);
             }
         }

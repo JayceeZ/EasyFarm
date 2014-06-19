@@ -4,11 +4,15 @@ package view;
  * @author Jean-Christophe Isoard
  */
 public enum Scale {
-    REALSIZE(1), BIGZOOM(4), NORMALZOOM(16), TINYZOOM(32);
+    REALSIZE(1), BIGZOOM(14), NORMALZOOM(10), TINYZOOM(6);
 
-    private int multiplicator;
+    private int reduce;
 
-    private Scale(int multiplicator) {
-        this.multiplicator = multiplicator;
+    private Scale(int reduce) {
+        this.reduce = reduce;
+    }
+
+    public int getReduce() {
+        return reduce;
     }
 }
