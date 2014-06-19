@@ -5,8 +5,8 @@ import model.location.Coordinate;
 import model.location.Location;
 import model.piece.Harvest;
 import model.piece.Parcel;
+import model.piece.Shape;
 
-import java.awt.*;
 import java.util.List;
 import java.util.Map;
 
@@ -32,7 +32,7 @@ public class LoadMap {
             Coordinate latitude = new Coordinate((int) item.get("latitudeInt"), (int) item.get("latitudeDec"), Cardinal.NORTH);
             Coordinate longitude = new Coordinate((int) item.get("longitudeInt"), (int) item.get("longitudeDec"), Cardinal.EAST);
             Location location = new Location(latitude, longitude);
-            Polygon geometry = (Polygon) item.get("geometry");
+            Shape geometry = Shape.construct((String) item.get("geometry"));
             Parcel parcel = new Parcel(id, harvest, location, geometry);
             map.addParcel(parcel);
         }

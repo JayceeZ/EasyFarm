@@ -3,6 +3,7 @@ package control;
 import model.Map;
 import model.location.Location;
 import model.piece.Parcel;
+import view.Scale;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -23,9 +24,9 @@ public class MapControl {
      * This method load the missing parcels in the map when using the top-left corner point given
      * @param point The top-left corner point to use (origin of the map)
      */
-    public void update(Location point) {
+    private void update(Location point) {
         //TODO EAS-4 update should ask for a predetermined bunch of parcels, depends on the loadPieceOfMap method
-        map.setOrigine(point);
+        //map.setOrigine(point);
         LoadMap.loadPieceOfMap(map, Location.zero, Location.zero);
     }
 
@@ -40,22 +41,22 @@ public class MapControl {
      * @see LoadMap
      * @param parcelId The id of the parcel we want
      */
-    public Polygon getGeometry(int parcelId) {
+    public Polygon getGeometry(int parcelId, Scale scale) {
         Parcel parcel = map.getParcel(parcelId);
         if(parcel == null) {
             return null;
         }
-        return parcel.getGeometry();
+        return parcel.getGeometry(scale);
     }
 
     /**
      * Return the collection of all geometry of all the parcels loaded for the map
      * @return All the geometries of parcels in a collection
      */
-    public Collection<Polygon> getAllGeometries() {
+    public Collection<Polygon> getAllGeometries(Scale scale) {
         Collection<Polygon> geometries = new ArrayList<>();
         for(Parcel parcel:map.getParcelList()) {
-            geometries.add(parcel.getGeometry());
+            geometries.add(parcel.getGeometry(scale));
         }
         return geometries;
     }

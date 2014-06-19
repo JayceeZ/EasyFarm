@@ -42,4 +42,12 @@ public class Location {
     public String toString() {
         return "["+latitude+", "+longitude+"]";
     }
+
+    public void setLatitude(Coordinate latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setLongitude(Coordinate longitude) {
+        this.longitude = longitude;
+    }
 }

@@ -1,4 +1,4 @@
-package model.piece;
+package view;
 
 /**
  * @author Jean-Christophe Isoard

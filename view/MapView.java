@@ -12,6 +12,7 @@ import java.awt.event.MouseEvent;
  */
 public class MapView extends JPanel {
     private MapControl mapControl;
+    private Scale scale;
 
     public MapView(MapControl mapControl) {
         this.mapControl = mapControl;
@@ -20,6 +21,7 @@ public class MapView extends JPanel {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
+        this.scale = Scale.NORMALZOOM;
         paintMap(g);
     }
 
@@ -27,7 +29,7 @@ public class MapView extends JPanel {
      * Paint the map with all the elements
      */
     private void paintMap(Graphics g) {
-        for(Polygon geometry:mapControl.getAllGeometries()) {
+        for(Polygon geometry:mapControl.getAllGeometries(scale)) {
             if(geometry != null) {
                 g.drawPolygon(geometry);
             }
