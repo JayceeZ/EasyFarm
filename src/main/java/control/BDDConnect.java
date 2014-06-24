@@ -45,8 +45,8 @@ public class BDDConnect {
      * @return The result of the query (null if nothing can be get)
      */
     public static List<Map<String, Object>> getResult(String sqlQuery) {
-        if(connectionBDD == null) {
-            if(!tryConnection()) {
+        if (connectionBDD == null) {
+            if (!tryConnection()) {
                 return null;
             }
         }
@@ -60,9 +60,9 @@ public class BDDConnect {
             queryOutput = state.executeQuery(sqlQuery);
             ResultSetMetaData resultMeta = queryOutput.getMetaData();
 
-            while(queryOutput.next()) {
+            while (queryOutput.next()) {
                 Map<String, Object> hashMap = new HashMap<>();
-                for(int i = 1; i <= resultMeta.getColumnCount(); i++) {
+                for (int i = 1; i <= resultMeta.getColumnCount(); i++) {
                     hashMap.put(resultMeta.getColumnName(i), queryOutput.getObject(i));
                 }
                 result.add(hashMap);

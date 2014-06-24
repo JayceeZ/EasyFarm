@@ -85,4 +85,8 @@ public class Map {
         }
         return geometries;
     }
+
+    public Location getOrigin() {
+        return origin;
+    }
 }

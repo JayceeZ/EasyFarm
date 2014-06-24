@@ -8,6 +8,7 @@ public enum Cardinal {
 
     /**
      * Return the first letter of the cardinal
+     *
      * @return The first letter of the cardinal
      */
     public char getShort() {

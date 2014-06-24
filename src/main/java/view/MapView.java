@@ -42,7 +42,7 @@ public class MapView extends JPanel {
     private class MouseListener extends MouseAdapter {
         @Override
         public void mouseClicked(MouseEvent e) {
-            mapControl.mouseClic(e.getPoint());
+            mapControl.mouseClic(e.getPoint(), scale);
         }
     }
 }

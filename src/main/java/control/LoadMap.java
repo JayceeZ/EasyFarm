@@ -8,7 +8,6 @@ import model.piece.Parcel;
 import model.piece.Shape;
 import org.postgresql.geometric.PGpolygon;
 
-import java.awt.*;
 import java.util.List;
 import java.util.Map;
 

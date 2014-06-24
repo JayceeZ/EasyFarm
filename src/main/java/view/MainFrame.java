@@ -8,6 +8,7 @@ import java.awt.*;
 /**
  * This is the main window, it should only contains view using controlers
  * <br /> If not, please be careful excluding them within the method getContainedView()
+ *
  * @author Jean-Christophe Isoard
  */
 public class MainFrame extends JFrame {
@@ -24,6 +25,7 @@ public class MainFrame extends JFrame {
 
     /**
      * Must return all the views, should be used to assign them their respective controllers
+     *
      * @return An array of components (please verify the instance before cast)
      */
     public Component[] getContainedViews() {

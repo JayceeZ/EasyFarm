@@ -1,5 +1,6 @@
 package model.piece;
 
+import model.Map;
 import model.location.Location;
 import view.Scale;
 
@@ -50,7 +51,7 @@ public class Parcel {
     }
 
     public Polygon getGeometry(Location mapOrigin, Scale scale) {
-        if(shape == null) {
+        if (shape == null) {
             return null;
         }
         return shape.calculateGeometry(mapOrigin, scale);
@@ -59,5 +60,9 @@ public class Parcel {
     @Override
     public String toString() {
         return "Parcel: " + id + " " + location + " " + shape + " " + harvest;
+    }
+
+    public void addPoint(Map map, Point mouseLocation, Scale scale) {
+        shape.addLocation(Shape.convertPointToLocation(map.getOrigin(), mouseLocation, scale));
     }
 }
